@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-import Rellax from 'rellax'
 
 createApp(App).mount('#app')
 
@@ -20,6 +19,5 @@ function reveal() {
       }
     }
   }
-  const relax = new Rellax('.relax')
 
   window.addEventListener("scroll", reveal);
