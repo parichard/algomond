@@ -15,7 +15,7 @@ build:
     - cd client
     - npm install
     - npm run build
-    - cp dist ../server/
+    - cp -r dist ../server/
   artifacts:
     paths:
       - server/dist
