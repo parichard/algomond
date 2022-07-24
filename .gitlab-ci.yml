@@ -15,7 +15,7 @@ build:
     - cd client
     - npm install
     - npm run build
-    - cp server/index.js dist/
+    - cp ../server/index.js dist/
   only:
     - dev
 
