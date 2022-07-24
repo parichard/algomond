@@ -1,2 +1,5 @@
+*/yarn.lock
+*/node_modules
+*/.env
 yarn.lock
-node-modules
+node_modules
