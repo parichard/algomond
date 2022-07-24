@@ -13,31 +13,5 @@ deploy-dev-client:
     - cd client
     - dpl --provider=heroku --app=$HEROKU_DEV_CLIENT --api-key=$HEROKU_API_KEY
   only:
-    - staging
+    - dev
 
-deploy-dev-server:
-  stage: deploy
-  image: ruby:latest
-  script:
-    - cd server
-    - dpl --provider=heroku --app=$HEROKU_DEV_SERVER --api-key=$HEROKU_API_KEY
-  only:
-    - staging
-
-deploy-client:
-  stage: deploy
-  image: ruby:latest
-  script:
-    - cd client
-    - dpl --provider=heroku --app=$HEROKU_APP_CLIENT --api-key=$HEROKU_API_KEY
-  only:
-      - main 
-
-deploy-server:
-  stage: deploy
-  image: ruby:latest
-  script:
-    - cd server
-    - dpl --provider=heroku --app=$HEROKU_APP_SERVER --api-key=$HEROKU_API_KEY
-  only:
-      - main
