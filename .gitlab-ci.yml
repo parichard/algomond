@@ -10,7 +10,6 @@ deploy-dev-client:
   stage: deploy
   image: ruby:latest
   script:
-    - cd client
     - dpl --provider=heroku --app=$HEROKU_DEV_CLIENT --api-key=$HEROKU_API_KEY
   only:
     - dev
