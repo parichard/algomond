@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 436 436" style="enable-background:new 0 0 436 436;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+</style>
+<g id="Layer_1_1_" class="st0">
+	
+		<image style="display:inline;overflow:visible;opacity:0.6;enable-background:new    ;" width="2048" height="2048" xlink:href="A064E2F2.jpg"  transform="matrix(2.0508 0 0 2.0508 -3764 -3764)">
+	</image>
+</g>
+<g id="Layer_2">
+	<path d="M380.2,145.4c9.5-15.3-13.8-55.6-26.5-63.7c-21.9-14.1-36-10-50.1-2.1c-14.9,8.4-68.3,116.7-62.5,135.3
+		c4.1,11.3,40.4,5.5,49.7,0c11.2-6.6,15.8-20.4,46-43.9C351.6,159.5,370.6,160.7,380.2,145.4z"/>
+	<polyline points="427.7,0 358,110.3 327.5,91 385,0 	"/>
+	<rect x="270.2" y="310.2" transform="matrix(0.8661 -0.4999 0.4999 0.8661 -139.2614 192.9414)" width="40.5" height="92.3"/>
+	<rect x="322.5" y="250.5" transform="matrix(0.5001 -0.866 0.866 0.5001 -87.6948 441.3802)" width="31.8" height="92.4"/>
+	<rect x="195.1" y="317.5" width="45.9" height="117.8"/>
+	<path d="M55.8,145.4c-9.5-15.3,13.8-55.6,26.5-63.7c21.9-14.1,36-10,50.1-2.1c14.9,8.4,68.3,116.7,62.5,135.3
+		c-4.1,11.3-40.4,5.5-49.7,0c-11.2-6.6-15.8-20.4-46-43.9C84.4,159.5,65.4,160.7,55.8,145.4z"/>
+	<polyline points="50.8,0 108.5,91.3 78,110.6 8.1,0 	"/>
+	<path d="M218,353.1c0,0-82.7-3.7-129.9-72c-41-75.7-78.2-104.7-72-114.2c4.8-5.5,44.6,33.3,57.1,43c24.6,16.7,68,52,144.8,54.6
+		c76.8-2.7,120.1-38,144.8-54.6c12.5-9.7,52.3-48.5,57.1-43c6.2,9.5-31,38.5-72,114.2C300.7,349.4,218,353.1,218,353.1z"/>
+	<rect x="99.3" y="336.1" transform="matrix(0.4999 -0.8661 0.8661 0.4999 -235.9041 304.2475)" width="92.3" height="40.5"/>
+	<rect x="51.4" y="280.7" transform="matrix(0.866 -0.5001 0.5001 0.866 -135.2586 88.5274)" width="92.4" height="31.8"/>
+</g>
+</svg>
