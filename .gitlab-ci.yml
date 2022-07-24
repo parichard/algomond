@@ -12,6 +12,7 @@ stages:
 build:
   stage: build
   script:
+    - cd client
     - npm install
     - npm run build
     - cp server/index.js dist/
