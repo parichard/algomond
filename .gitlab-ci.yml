@@ -16,6 +16,9 @@ build:
     - npm install
     - npm run build
     - cp ../server/index.js dist/
+  artifacts:
+    paths:
+      - client/dist
   only:
     - dev
 
