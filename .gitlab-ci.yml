@@ -4,12 +4,23 @@ before_script:
     - gem install dpl
 
 stages:
+  - build
   - deploy
+
+build:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+    - cp server/index.js dist/
+  only:
+    - dev
 
 deploy-dev-client:
   stage: deploy
   image: ruby:latest
   script:
+    - cd dist
     - dpl --provider=heroku --app=$HEROKU_DEV_CLIENT --api-key=$HEROKU_API_KEY
   only:
     - dev
