@@ -12,7 +12,7 @@
         <li><a href="/">Home</a></li>
         <li><a href="#">Buy Cards</a></li>
         <li><a href="#">Play</a></li>
-        <li><a id="galleryurl" href="gallery">Gallery</a></li>
+        <li><a id="galleryurl" href="#/gallery">Gallery</a></li>
         <li><a href="#">Informations</a></li>
         <li>
             <div class="wallet-co-button">
