@@ -4,9 +4,11 @@ import { ref, computed } from 'vue'
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import Header from './components/Header.vue'
 import Home from './components/Home.vue'
+import Gallery from './components/Gallery.vue'
 
 const routes = {
-    '/': Home
+    '/': Home,
+    '/gallery': Gallery
 }
 
 const currentPath = ref(window.location.hash)
