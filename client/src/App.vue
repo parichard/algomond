@@ -5,6 +5,8 @@ import { ref, computed } from 'vue'
 import Header from './components/Header.vue'
 import Home from './components/Home.vue'
 import Gallery from './components/Gallery.vue'
+import { loadFull } from 'tsparticles'
+
 
 const routes = {
     '/': Home,
@@ -15,28 +17,89 @@ const currentPath = ref(window.location.hash)
 
 window.addEventListener('hashchange', () => {
     currentPath.value = window.location.hash
-    console.log(currentPath)
 })
 
 const currentView = computed(() => {
     return routes[currentPath.value.slice(1) || '/'] || ''
 })
+
+const particlesInit = async (engine) => {
+        await loadFull(engine);
+      }
+//particles
+const count = computed(() => {
+    console.log(count)
+    return (Math.round(document.body.scrollHeight/20))
+})
+
+const config = ref({
+    fpsLimit: 60,
+    fullScreen: { enable: false},
+    
+    particles: {
+        color: { value: '#ffffff' },
+        // interactivity:{
+        //     detect_on: "canvas",
+        //     events:{
+        //         resize:true,
+        //     },
+        // },
+        move: {
+            direction: 'top',
+            enable: true,
+            outModes: 'out',
+            random: false,
+            speed: 0.35,
+            straight: false,
+        },
+        number: { density: { enable: false, area: 1000 }, value: count },
+        opacity: {
+            value: 0.5,
+        },
+        shape: {
+            type: 'circle',
+        },
+        size: {
+            value: { min: 0.2, max: 1.25 },
+        },
+    },
+})
 </script>
 
 <template>
-    <div class="dragon-background rellax" data-rellax-speed="0.6">
-        <img src="/img/Dragon_Essence.png" alt="dragon_background">
-    </div>
+    
+    <Particles
+        id="tsparticles"
+        :options= "config"
+        :particlesInit="particlesInit"
+        />
     <div class="dark-fade"></div>
-    <img class="stars-top rellax" data-rellax-speed="1.5" src="/img/stars_top.png" alt="stars_background">
     <Header />
 
     <component :is="currentView" />
+    
 </template>
 
 <style>
+
+
+@import url('https://fonts.googleapis.com/css?family=Alata&display=swap');
+
+
 html {
+    position: relative;
     scroll-behavior: smooth;
+    min-height: 100%;
+    /* height: 100%; */
+}
+
+#tsparticles {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -10;
 }
 
 * {
@@ -50,7 +113,7 @@ body {
     background: #030118;
     background: -webkit-gradient(linear, left top, left bottom, from(#00000e), color-stop(29%, #060c31), to(#03011d)) no-repeat;
     background: linear-gradient(180deg, #00000e 0%, #060c31 29%, #03011d 100%) no-repeat;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     height: 100%;
     color: whitesmoke;
     width: 100%;

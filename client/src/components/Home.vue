@@ -5,8 +5,10 @@ import Header from './Header.vue'
 </script>
 
 <template>
-    
-
+<div class="dragon-background rellax" data-rellax-speed="0.6">
+        <img src="/img/Dragon_Essence.png" alt="dragon_background">
+    </div>
+<img class="stars-top rellax" data-rellax-speed="1.5" src="/img/stars_top.png" alt="stars_background">
   <!-- <Header /> -->
     <section class="hero rellax" data-rellax-speed="1">
         <img class="animated-circles" src="/img/animated_circles_top.png" alt="animated circles hero">
