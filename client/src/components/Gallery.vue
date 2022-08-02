@@ -94,7 +94,7 @@
 
 <template>
     <div class="w-full">
-        <input v-model="address" class="m-14 w-3/4 p-2 bg-gray-800 border-2" type="text">
+        <input v-model="address" placeholder="Enter wallet address" class="m-14 w-3/4 p-2 bg-gray-800 border-2" type="text">
         <button class="inline-block px-6 py-2.5 bg-gray-800 text-white font-medium text-xs leading-tight uppercase shadow-md hover:bg-gray-900 hover:shadow-lg focus:bg-gray-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-900 active:shadow-lg transition duration-150 ease-in-out" @click="getAccount">Submit</button>
     </div>
     <!-- <img class="cards" :key='i' v-for="(card, i) in cardObjectsList" :src="'img/cards_artwork/'+ card['source']" alt="" width="250" height="300"> -->
