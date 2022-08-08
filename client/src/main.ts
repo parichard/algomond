@@ -3,7 +3,6 @@ import './style.css'
 import App from './App.vue'
 import Rellax from 'rellax'
 import Particles from 'particles.vue3'
-import Vue from 'vue'
 import { store } from './store'
 
 createApp(App).use(Particles).use(store).mount('#app')
