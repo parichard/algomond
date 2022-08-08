@@ -6,14 +6,7 @@ import Particles from 'particles.vue3'
 import Vue from 'vue'
 import { store } from './store'
 
-createApp(App).use(Particles).mount('#app')
-
-Vue.config.productionTip = false;
-
-new Vue({
-  store,
-  render: h => h(App),
-}).$mount('#app');
+createApp(App).use(Particles).use(store).mount('#app')
 
 function reveal() {
     var reveals = document.querySelectorAll(".reveal");
