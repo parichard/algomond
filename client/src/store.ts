@@ -1,7 +1,13 @@
 import { createStore } from 'vuex'
+import VuexPersistence from 'vuex-persist';
+
+
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage
+})
 
 // Create a new store instance.
-const store = createStore({
+export const store = createStore({
   state () {
     return {
       count: 0
@@ -11,5 +17,6 @@ const store = createStore({
     increment (state) {
       state.count++
     }
-  }
+  },
+  plugins: [vuexLocal.plugin]
 })
