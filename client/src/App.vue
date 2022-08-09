@@ -28,7 +28,6 @@ const particlesInit = async (engine) => {
       }
 //particles
 const count = computed(() => {
-    console.log(count)
     return (Math.round(document.body.scrollHeight/20))
 })
 
@@ -68,15 +67,17 @@ const config = ref({
 
 <template>
     
-    <Particles
-        id="tsparticles"
-        :options= "config"
-        :particlesInit="particlesInit"
-        />
-    <div class="dark-fade"></div>
-    <Header />
+    <div>
+        <Particles
+            id="tsparticles"
+            :options= "config"
+            :particlesInit="particlesInit"
+            />
+        <div class="dark-fade"></div>
+        <Header />
 
-    <component :is="currentView" />
+        <component :is="currentView" />
+    </div>
     
 </template>
 

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@randlabs/myalgo-connect": "^1.2.0",
     "particles.vue3": "^2.1.3",
     "rellax": "^1.12.1",
     "tsparticles": "^2.1.3",
