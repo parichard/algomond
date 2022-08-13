@@ -1,24 +1,36 @@
 <script setup lang="ts">
+  import { useStore } from 'vuex'
+  import {ref, computed} from 'vue'
 
+  const store = useStore()
+
+  const getAddress = computed(() => {
+      const address = store.getters.getAddress
+    return (address ? address.slice(0,5) +  '...' + address.slice(53, 58) : '')
+})
+
+  function connectMyAlgoWallet(){
+    store.dispatch("connectWallet")
+  }
 </script>
 
 <template>
 <nav>
-    <a href="/">
+    <a href="#">
         <img src="/img/Algomond_LOGO_white_on_black.svg" alt="Algomond Logo">
         <h2 class="logo">ALGOMOND</h2>
     </a>
     <ul class="tab">
-        <li><a href="/">Home</a></li>
+        <li><a href="#">Home</a></li>
         <li><a href="#">Buy Cards</a></li>
         <li><a href="#">Play</a></li>
         <li><a id="galleryurl" href="#/gallery">Gallery</a></li>
         <li><a href="#">Informations</a></li>
         <li>
             <div class="wallet-co-button">
-                <button onclick="connectToMyAlgo()">
-                    <img id="wallet-icon" src="/img/wallet.svg" alt="wallet icon">
-                    <p id="wallet-button-text">Connect Wallet!</p>
+                <button @click="connectMyAlgoWallet">
+                    <img :class="getAddress ? '' : 'hidden'" id="wallet-icon" src="/img/wallet.svg" alt="wallet icon">
+                    <p id="wallet-button-text">{{getAddress || "Connect Wallet!"}}</p>
                 </button>
             </div>
         </li>
@@ -164,7 +176,6 @@ nav ul li .wallet-co-button button img {
   width: 28px;
   -webkit-filter: invert(100%);
           filter: invert(100%);
-  display: none;
 }
 
 nav ul li .wallet-co-button button:hover {
