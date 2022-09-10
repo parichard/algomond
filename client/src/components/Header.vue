@@ -3,14 +3,21 @@
   import {ref, computed} from 'vue'
 
   const store = useStore()
-
+  
   const getAddress = computed(() => {
       const address = store.getters.getAddress
     return (address ? address.slice(0,5) +  '...' + address.slice(53, 58) : '')
 })
+  const getUsername = computed(() => {
+      const username = store.getters.getUsername
+    return (username ? username : '')
+})
 
   function connectMyAlgoWallet(){
     store.dispatch("connectWallet")
+  }
+  function gotoUserpage(){
+    window.open("#/userpage", "_self");
   }
 </script>
 
@@ -22,15 +29,16 @@
     </a>
     <ul class="tab">
         <li><a href="#">Home</a></li>
-        <li><a href="#">Buy Cards</a></li>
-        <li><a href="#">Play</a></li>
+        <li><a href="https://www.randgallery.com/algo-collection/?address=ALGMD6LOC2ND6IWCPLYIRO7TC7GAMLLFNK2Y656A4FAJUI47TJ6MI4ZMNU" target="_blank">Buy Cards</a></li>
+        <li><a href="http://algomondgame.000webhostapp.com/" target="_blank">Play</a></li>
         <li><a id="galleryurl" href="#/gallery">Gallery</a></li>
-        <li><a href="#">Informations</a></li>
+        <li><a href="#">Merch</a></li>
         <li>
             <div class="wallet-co-button">
-                <button @click="connectMyAlgoWallet">
-                    <img :class="getAddress ? '' : 'hidden'" id="wallet-icon" src="/img/wallet.svg" alt="wallet icon">
-                    <p id="wallet-button-text">{{getAddress || "Connect Wallet!"}}</p>
+                <button @click="gotoUserpage">
+                    <!-- <img :class="getUsername ? '' : 'hidden'" id="wallet-icon" src="/img/wallet.svg" alt="wallet icon"> -->
+                    <p id="wallet-button-text">{{getUsername || "Connect Now"}}<br></p>
+                    <p id="wallet-button-text">{{getAddress || ""}}</p>
                 </button>
             </div>
         </li>
@@ -150,7 +158,7 @@ nav ul li .wallet-co-button {
 nav ul li .wallet-co-button button {
   background-image: -webkit-gradient(linear, left top, right top, from(#314755), color-stop(51%, #26a0da));
   background-image: linear-gradient(to right, #314755 0%, #26a0da 51%);
-  padding: 8px 15px;
+  padding: 4px 15px;
   text-align: center;
   text-transform: uppercase;
   -webkit-box-align: center;
@@ -158,7 +166,8 @@ nav ul li .wallet-co-button button {
           align-items: center;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
-  display: inline-flex;
+  /* display: inline-flex; */
+  font-size: 0.75em;
   -webkit-transition: 0.56s;
   transition: 0.56s;
   background-size: 200% auto;

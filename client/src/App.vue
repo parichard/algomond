@@ -5,12 +5,15 @@ import { ref, computed } from 'vue'
 import Header from './components/Header.vue'
 import Home from './components/Home.vue'
 import Gallery from './components/Gallery.vue'
+import UserPage from './components/UserPage.vue'
+import HelloWorld from './components/HelloWorld.vue'
 import { loadFull } from 'tsparticles'
-
 
 const routes = {
     '/': Home,
-    '/gallery': Gallery
+    '/gallery': Gallery,
+    '/userpage': UserPage,
+    '/helloworld': HelloWorld
 }
 
 const currentPath = ref(window.location.hash)
@@ -37,12 +40,6 @@ const config = ref({
     
     particles: {
         color: { value: '#ffffff' },
-        // interactivity:{
-        //     detect_on: "canvas",
-        //     events:{
-        //         resize:true,
-        //     },
-        // },
         move: {
             direction: 'top',
             enable: true,
@@ -101,6 +98,8 @@ html {
     right: 0;
     position: absolute;
     z-index: -10;
+    -webkit-animation: fadeIn 1.5s;
+    animation: fadeIn 1.5s;
 }
 
 * {
@@ -137,7 +136,7 @@ body {
     top: -200px;
     left: 100px;
     z-index: -3;
-    opacity: 0.065;
+    opacity: 0.055;
     z-index: -3;
 }
 
@@ -159,7 +158,7 @@ body {
     position: absolute;
     left: 0px;
     z-index: -1;
-    width: 10%;
+    width: 25%;
     -webkit-animation: fadeIn 1.5s;
     animation: fadeIn 1.5s;
 }
@@ -255,10 +254,10 @@ body {
     animation-direction: alternate;
 }
 
-.hero .animated-circles {
+.animated-circles {
     position: absolute;
     width: 150px;
-    top: -135px;
+    top: 120px;
     left: 30px;
 }
 

@@ -4,8 +4,10 @@ import App from './App.vue'
 import Rellax from 'rellax'
 import Particles from 'particles.vue3'
 import { store } from './store'
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 
-createApp(App).use(Particles).use(store).mount('#app')
+createApp(App).use(Particles).use(store).use(VueSweetalert2).mount('#app')
 
 function reveal() {
     var reveals = document.querySelectorAll(".reveal");
