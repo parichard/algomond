@@ -3,5 +3,26 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()]
+  plugins: [vue()],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `
+          @import "./src/styles/_animations.scss";
+          @import "./src/styles/_variables.scss";
+          @import "./src/styles/_mixins.scss";
+          @import "./src/styles/_helpers.scss";
+        `
+      }
+    }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      },
+    }
+  }
 })

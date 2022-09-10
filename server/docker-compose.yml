@@ -1,0 +1,13 @@
+version: '3'
+services:
+  algomongo:
+    image: 'mongo:latest'
+    container_name: 'algomongo-db'
+    environment:
+      - MONGO_INITDB_DATABASE=card
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=mongo
+    volumes:
+      - ./mongo-volume:/data/db
+    ports:
+      - '27017-27019:27017-27019'

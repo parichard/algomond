@@ -10,9 +10,10 @@ import Header from './Header.vue'
             <img src="/img/Dragon_Essence.png" alt="dragon_background">
         </div>
     <img class="stars-top rellax" data-rellax-speed="1.5" src="/img/stars_top.png" alt="stars_background">
+    <img class="animated-circles" src="/img/animated_circles_top.png" alt="animated circles hero">
     <!-- <Header /> -->
         <section class="hero rellax" data-rellax-speed="1">
-            <img class="animated-circles" src="/img/animated_circles_top.png" alt="animated circles hero">
+            
             <div class="text">
                 <h1>Bringing the <b>Algomond</b> magic to Algorand.</h1>
                 <h4>Algomond is an NFT trading cards video game with hand drawn fun and spooky
@@ -25,7 +26,7 @@ import Header from './Header.vue'
             <img src="/img/Carrousel.png" alt="carrousel">
             <p>Build your deck from a range of monster and spell cards.</p>
         </section>
-        <img class="stars-mid rellax" data-rellax-speed="-0.6" src="/img/small_stars.png" alt="small_stars_background">
+        <img class="stars-mid rellax" data-rellax-speed="-0.3" src="/img/small_stars.png" alt="small_stars_background">
         <!-- <section>
             <h2>Your Wallet, Your Cards.</h2>
         </section> -->
