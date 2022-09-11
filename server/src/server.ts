@@ -20,7 +20,6 @@ import auth from './auth/authAPI'
   app.use('/', auth)
   app.use(cors({origin: function() {return true}}))
   app.use(function(error, req, res, next) {
-    console.log(error)
     const code = error.status || 500
     res.status(code)
     res.json({
