@@ -21,13 +21,13 @@ build:
       - server/dist
   only:
     - dev
-    
+
 build-server:
   stage: build
   script:
     - cd server
     - npm install
-    - npm run build
+    - npm run build-typescript
   artifacts:
     paths:
       - server/build
@@ -39,7 +39,7 @@ deploy-dev-client:
   image: ruby:latest
   script:
     - cd server
-    - mv dist Procfile build
+    - mv dist Procfile build package.json
     - cd build
     - dpl --provider=heroku --app=$HEROKU_DEV_CLIENT --api-key=$HEROKU_API_KEY --skip_cleanup
   only:
