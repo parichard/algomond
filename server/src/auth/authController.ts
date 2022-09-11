@@ -14,12 +14,6 @@ export default class AuthController {
         if(user) {
             throw createError(501, 'User already exists')
         }
-        else if(body.username.length<4){
-            throw createError(502, 'Username too short')
-        }
-        else if(body.password.length<8){
-            throw createError(503, 'Password too short')
-        }
 
         body.password = await bcrypt.hash(body.password, 12) //hashes password
 
@@ -79,7 +73,6 @@ export default class AuthController {
 
     static async verify(username) {
         console.log("\rAuthController@verify")
-        console.log(username)
         const user = await usersDAL.findOne({username: username})
         if(user) {
             return {

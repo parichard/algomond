@@ -1,20 +1,15 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 // This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
+// Check} out https//vuejs.org/api/sfc-script-setup.html#script-setup
 import Header from './components/Header.vue'
-import Home from './components/Home.vue'
-import Gallery from './components/Gallery.vue'
-import UserPage from './components/UserPage.vue'
-import HelloWorld from './components/HelloWorld.vue'
-import { loadFull } from 'tsparticles'
 
-const routes = {
-    '/': Home,
-    '/gallery': Gallery,
-    '/userpage': UserPage,
-    '/helloworld': HelloWorld
-}
+import { useStore } from 'vuex'
+
+import { loadFull } from 'tsparticles'
+import Rellax from 'rellax'
+
+const store = useStore()
 
 const currentPath = ref(window.location.hash)
 
@@ -27,8 +22,8 @@ const currentView = computed(() => {
 })
 
 const particlesInit = async (engine) => {
-        await loadFull(engine);
-      }
+    await loadFull(engine);
+ }
 //particles
 const count = computed(() => {
     return (Math.round(document.body.scrollHeight/20))
@@ -37,7 +32,7 @@ const count = computed(() => {
 const config = ref({
     fpsLimit: 60,
     fullScreen: { enable: false},
-    
+
     particles: {
         color: { value: '#ffffff' },
         move: {
@@ -60,10 +55,12 @@ const config = ref({
         },
     },
 })
+
+  new Rellax('.rellax')
 </script>
 
 <template>
-    
+
     <div>
         <Particles
             id="tsparticles"
@@ -73,9 +70,9 @@ const config = ref({
         <div class="dark-fade"></div>
         <Header />
 
-        <component :is="currentView" />
+        <router-view></router-view>
     </div>
-    
+
 </template>
 
 <style>
