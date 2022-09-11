@@ -2,11 +2,11 @@ import express from 'express'
 import path from 'path'
 import serveStatic from 'serve-static'
 import { json } from 'body-parser'
-import { connectMongoDB, populateDB } from './core/db'
+import { connectMongoDB, populateDB } from './src/core/db'
 import cors from 'cors'
 
-import cards from './cards/cardsAPI'
-import auth from './auth/authAPI'
+import cards from './src/cards/cardsAPI'
+import auth from './src/auth/authAPI'
 
 (async () => {
 

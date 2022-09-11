@@ -22,14 +22,24 @@ build:
   only:
     - dev
 
-deploy-dev-client:
-  stage: deploy
-  image: ruby:latest
+build-back:
+  stage: build
   script:
     - cd server
     - npm install
     - npm run build
     - mv server/* .
+  artifacts:
+    paths:
+      - server
+  only:
+    - dev
+
+deploy-dev-client:
+  stage: deploy
+  image: ruby:latest
+  script:
+    - cd server
     - dpl --provider=heroku --app=$HEROKU_DEV_CLIENT --api-key=$HEROKU_API_KEY --skip_cleanup
   only:
     - dev
