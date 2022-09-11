@@ -1,7 +1,7 @@
 {
     "scripts": {
-        "start": "node server/index.js",
-        "postinstall": "tsc && rm -rf src",
+        "start": "node server/server.js",
+        "build": "tsc",
         "dev": "ts-node-dev src/server.ts"
     },
     "dependencies": {
