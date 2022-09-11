@@ -28,10 +28,11 @@ build-back:
     - cd server
     - npm install
     - npm run build
-    - mv server/* .
+    - mv dist server
+    - mv package.json Procfile server
   artifacts:
     paths:
-      - server
+      - server/server
   only:
     - dev
 
@@ -39,7 +40,7 @@ deploy-dev-client:
   stage: deploy
   image: ruby:latest
   script:
-    - cd server
+    - cd server/server
     - dpl --provider=heroku --app=$HEROKU_DEV_CLIENT --api-key=$HEROKU_API_KEY --skip_cleanup
   only:
     - dev
