@@ -89,7 +89,7 @@ export const store = createStore({
         console.log('error')
       }
     },
-    
+
     async signup({ commit }, user) { // user = username and login from userpage.vue
       try{
         const res: any = await fetch('/api/signup', { // /api = proxy to server (vite.config.ts) -> localhost:3000/signup

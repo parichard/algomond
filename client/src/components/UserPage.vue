@@ -20,7 +20,7 @@ let loadingRegister = ref(false)
 let enableRegisterUsr = ref(false)
 let enableRegisterPsw = ref(false)
 let enableRegisterEmail = ref(false)
-  
+
 
 
 const myAlgoConnect = new MyAlgoConnect();
@@ -41,8 +41,9 @@ async function maketxs(){
     const wallet = await connectWallet()
     const suggestedParams = await algodClient.getTransactionParams().do()
     const amountInMicroAlgos = algosdk.algosToMicroalgos(0)
+    const username = store.getters.getUsername
     let utf8Encode = new TextEncoder();
-    const note = utf8Encode.encode(getUserName['_value'])
+    const note = utf8Encode.encode(username)
 
     const unsignedTxn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
     from: wallet,
@@ -63,7 +64,7 @@ async function maketxs(){
 }
 
 const getAddress = computed(() => {
-      //const address = 
+      //const address =
     return store.getters.getAddress
 })
 
@@ -73,7 +74,7 @@ const getFormattedAddress= computed(() =>{
 })
 
 const getUserName = computed(() => {
-      const username = store.getters.getUsername
+    const username = store.getters.getUsername
     return username
 })
 
@@ -346,7 +347,7 @@ function gotogallery(){
                 />
                 <p class="error" :key='i' v-for="(error, i) in usernameerrors">{{error.message}}</p>
             </div>
-            
+
             <div class="mb-4">
                 <input @keyup="verifyPassword"
                 type="password"
@@ -395,7 +396,7 @@ function gotogallery(){
         <div class="wallet-info" v-if="store.getters.hasWalletConnected">
             <h1>{{getUserName}}</h1>
             <hr />
-            
+
             <div class="inline" v-if="store.getters.hasWalletConnected">
                 <p>
                 Your connected wallet: <a :href= "'https://algoexplorer.io/address/' + getAddress " target="_blank">{{getFormattedAddress}}</a>
@@ -405,14 +406,14 @@ function gotogallery(){
                 </button>
             </div>
         </div>
-        
+
         <div class="buttons" v-if="store.getters.isLoggedIn">
             <div v-if="!store.getters.hasWalletConnected">
                 <button class="button linkalgowalletbutton" @click="maketxs()">
                     Link Algorand Wallet to account
                 </button>
             </div>
-            
+
             <div>
                 <button class="button signoutbutton" @click="signoutUser()">
                     Logout
@@ -437,7 +438,7 @@ function gotogallery(){
     h1
         font-size: 2em
         display: block
-        
+
     .inline
         display: inline-flex
         align-items: center

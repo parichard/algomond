@@ -4,6 +4,8 @@ import bcrypt from 'bcrypt'
 import createError from 'http-errors'
 import fetch from 'node-fetch'
 
+const salt = process.env.PASS_SALT || "d9bdc282cb696731d7b724aa8193eefafbb91fd96dbc961586bc940ef974158e7ed9df21bb7c8d301e414e4e2e4cbaaef17aa73ec26d6214c794bac0874d1e35"
+
 export default class AuthController {
 
     static async signup(body) {
@@ -112,10 +114,10 @@ export default class AuthController {
 function generateAccessToken(username) {
     console.log("\rAuthController@generateToken");
     return jwt.sign({
-        //exp: Math.floor(Date.now() / 1000) + (60 * 60),
+        exp: Math.floor(Date.now() / 1000) + (60 * 60),
         expiresIn: "60d",
         data: username
-    }, "d9bdc282cb696731d7b724aa8193eefafbb91fd96dbc961586bc940ef974158e7ed9df21bb7c8d301e414e4e2e4cbaaef17aa73ec26d6214c794bac0874d1e35")
+    }, salt)
 }
 
 async function checkTx(username, wallet){

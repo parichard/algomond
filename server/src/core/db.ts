@@ -4,8 +4,9 @@ import CardModel from '../cards'
 
 export const connectMongoDB = async () => {
   try {
+    const url = process.env.MONGO_URL || 'mongodb://mongo:mongo@localhost:27017/card?authSource=admin'
     console.log('trying db connection')
-    await mongoose.connect('mongodb://mongo:mongo@localhost:27017/card?authSource=admin')
+    await mongoose.connect(url)
 
 
     console.log('connection to algomongo successfull')
