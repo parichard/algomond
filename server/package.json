@@ -1,6 +1,6 @@
 {
     "scripts": {
-        "start": "node server/server.js",
+        "start": "node build/server.js",
         "build": "tsc",
         "dev": "ts-node-dev src/server.ts"
     },
