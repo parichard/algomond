@@ -21,11 +21,6 @@ import auth from './src/auth/authAPI'
     //use the serve-static package to serve the bundled app files in the dist directory
     app.use('/', serveStatic(path.join(__dirname, '/dist')))
 
-    // this * route is to serve project on different page routes except root `/`
-    app.get(/.*/, function (req, res) {
-        res.sendFile(path.join(__dirname, '/dist/index.html'))
-    })
-
     app.use(json())
     app.use('/api/cards', cards) // defines url in browser
     app.use('/api/', auth)
