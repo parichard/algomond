@@ -39,7 +39,7 @@ deploy-dev-client:
   image: ruby:latest
   script:
     - cd server
-    - mv dist Procfile build package.json
+    - mv dist Procfile package.json build
     - cd build
     - dpl --provider=heroku --app=$HEROKU_DEV_CLIENT --api-key=$HEROKU_API_KEY --skip_cleanup
   only:
