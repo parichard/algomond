@@ -28,7 +28,7 @@ build-back:
     - cd server
     - npm install
     - npm run build
-    - mv package.json Procfile server
+    - mv package.json tsconfig.json Procfile server
   artifacts:
     paths:
       - server/server
