@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, setup } from 'vue'
+import { ref, computed } from 'vue'
 import { useStore, mapGetters } from 'vuex'
 import { useRouter } from 'vue-router'
 import algosdk from 'algosdk'
@@ -11,14 +11,14 @@ import Swal from 'sweetalert2'
 const store = useStore()
 const router = useRouter()
 
-const signup = ref({})
-const errors = ref([])
+const signup : any= ref({})
+const errors : any= ref([])
 
-const loadingSignIn = ref(false)
-const loadingRegister = ref(false)
-const enableRegisterUsr = ref(false)
-const enableRegisterPsw = ref(false)
-const enableRegisterEmail = ref(false)
+const loadingSignIn: any = ref(false)
+const loadingRegister: any = ref(false)
+const enableRegisterUsr: any = ref(false)
+const enableRegisterPsw: any = ref(false)
+const enableRegisterEmail: any = ref(false)
 const username = store.getters.getUsername
 console.log(username)
 if(username) {
@@ -38,11 +38,6 @@ const getUserName = computed(() => {
     const username = store.getters.getUsername
     return username
 })
-
-
-function updateRegisterStatus() {
-    register.value = !register.value
-}
 
 const signupUser = async () => {
     const data = signup.value
@@ -75,7 +70,7 @@ const signupUser = async () => {
 
 function verifyUsername(){
     errors.value=[]
-    const usrnm = signup.value.username
+    const usrnm = signup.value.username || ''
     try {
         let errArr = []
         let errStr = ""
@@ -104,7 +99,7 @@ function verifyUsername(){
 function verifyPassword(){
     errors.value=[]
     // errors.value=[]
-    const psw = signup.value.password
+    const psw = signup.value.password || ''
     try {
         let errorArr = []
         let errorStr = ""
@@ -138,7 +133,7 @@ function verifyPassword(){
 
 function verifyEmail(){
     errors.value=[]
-    const email = signup.value.email
+    const email = signup.value.email || ''
     try{
         let errorArr = []
         let errorStr = ""

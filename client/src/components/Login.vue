@@ -11,10 +11,10 @@ import Swal from 'sweetalert2'
 const store = useStore()
 const router = useRouter()
 
-const login = ref({})
-const errors = ref([])
-const loading = ref(false)
-const username = store.getters.getUsername
+const login: any = ref({})
+const errors: any = ref([])
+const loading: any = ref(false)
+const username: any = store.getters.getUsername
 if(username) {
     router.push('/users')
 }
@@ -39,8 +39,8 @@ const isLoggedIn = computed(() => {
 const loginUser = async () => {
     errors.value = []
     const data = {
-        username: login.value.username,
-        password: login.value.password
+        username: login.value.username || '',
+        password: login.value.password || ''
     }
     try {
         loading.value = true

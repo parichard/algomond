@@ -11,16 +11,6 @@ import Rellax from 'rellax'
 
 const store = useStore()
 
-const currentPath = ref(window.location.hash)
-
-window.addEventListener('hashchange', () => {
-    currentPath.value = window.location.hash
-})
-
-const currentView = computed(() => {
-    return routes[currentPath.value.slice(1) || '/'] || ''
-})
-
 const particlesInit = async (engine) => {
     await loadFull(engine);
  }
