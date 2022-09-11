@@ -8,6 +8,5 @@
 yarn.lock
 node_modules
 package-lock.json
-.gitlab-ci.yml
 
 */mongo-volume
