@@ -76,6 +76,7 @@ const store = createStore({
                         })
                     })
                     const token = await res.json()
+                    
                     commit('changeAddress', token)
                     commit('updateUsername', token)
                     commit('loginSuccess', token)

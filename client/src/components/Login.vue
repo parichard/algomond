@@ -44,9 +44,8 @@ const loginUser = async () => {
     }
     try {
         loading.value = true
-        console.log(data)
         let status = await store.dispatch('login', data) // sends user login input data to store.ts
-        if (status === 400) errors.value.push("username and password do not match")
+        if (status === 404) errors.value.push("username and password do not match")
         loading.value = false
         if (store.getters.isLoggedIn){
             Swal.fire({
@@ -95,7 +94,7 @@ const loginUser = async () => {
                 <p class="error" :key='i' v-for="(error, i) in errors">{{error}}</p>
             </div>
             <!-- Sign in button -->
-            <button :disabled="!login.password || !login.username || errors.length != 0" class="bg-gray-600 text-white mb-3 py-2 registerbutton" :class="{'disabled': !login.password || !login.username || errors.length != 0}" type="submit">
+            <button :disabled="!login.password || !login.username || errors.length != 0 || loading === true" class="bg-gray-600 text-white mb-3 py-2 registerbutton" :class="{'disabled': !login.password || !login.username || errors.length != 0}" type="submit">
                 <p v-if="loading===false">Sign in</p>
                 <img v-else class="center-image" src="/img/loading_3_dots.svg" alt="loading">
             </button>

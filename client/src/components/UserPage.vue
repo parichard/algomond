@@ -11,6 +11,9 @@ import Swal from 'sweetalert2'
 const store = useStore()
 const router = useRouter()
 
+const loadingVerifyWalletStep1: any = ref(false)
+const loadingVerifyWalletStep2: any = ref(false)
+
 const errors = ref([])
 
 const myAlgoConnect = new MyAlgoConnect();
@@ -28,7 +31,9 @@ async function connectWallet() {
     return accounts[0].address
 }
 async function maketxs(){
+    loadingVerifyWalletStep1.value = true
     const wallet = await connectWallet()
+    loadingVerifyWalletStep2.value = true
     const suggestedParams = await algodClient.getTransactionParams().do()
     const amountInMicroAlgos = algosdk.algosToMicroalgos(0)
     const username = store.getters.getUsername
@@ -49,6 +54,8 @@ async function maketxs(){
         verifyWallet(wallet)
     }
     catch(error){
+        loadingVerifyWalletStep1.value = false
+        loadingVerifyWalletStep2.value = false
         return
     }
 }
@@ -71,7 +78,17 @@ const getUserName = computed(() => {
 const verifyWallet = async (wallet) => {
     try {
         await store.dispatch('verifyWallet', wallet) // sends request to store to verify wallet
+        Swal.fire({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        icon: 'success',
+        title: 'Successfully Linked Wallet!'
+    })
     } catch (error) {
+        loadingVerifyWalletStep1.value = false
+        loadingVerifyWalletStep2.value = false
         return
     }
 }
@@ -79,7 +96,7 @@ const verifyWallet = async (wallet) => {
 const signoutUser = async () => {
     try {
         await store.dispatch('logout') // sends request to store for logging out
-        console.log(store.getters.isLoggedIn) // store answer to say if user is now logged in (with the authentification token)
+        //console.log(store.getters.isLoggedIn) // store answer to say if user is now logged in (with the authentification token)
         if (!store.getters.isLoggedIn){
             Swal.fire({
                 toast: true,
@@ -128,9 +145,9 @@ function gotogallery(){
 <template>
     <div class="w-full md:w-4/12 p-6 rounded-lg mx-auto mt-24 formback">
         <!-- UserPage -->
-        <div class="wallet-info" v-if="store.getters.hasWalletConnected">
-            <h1>{{getUserName}}</h1>
+        <h1>{{getUserName}}</h1>
             <hr />
+        <div class="wallet-info" v-if="store.getters.hasWalletConnected">
 
             <div class="inline" v-if="store.getters.hasWalletConnected">
                 <p>
@@ -145,7 +162,10 @@ function gotogallery(){
         <div class="buttons" v-if="store.getters.isLoggedIn">
             <div v-if="!store.getters.hasWalletConnected">
                 <button class="button linkalgowalletbutton" @click="maketxs()">
-                    Link Algorand Wallet to account
+                    <p v-if="loadingVerifyWalletStep1===false">Link Algorand Wallet to account</p>
+                    <p v-if="loadingVerifyWalletStep2===true">Step 2/2: Sign 0 Algo Transaction</p>
+                    <p v-else-if="loadingVerifyWalletStep1===true">Step 1/2: Connect Wallet</p>
+                    <img v-if="loadingVerifyWalletStep1===true" class="center-image" src="/img/loading_3_dots.svg" alt="loading">
                 </button>
             </div>
 

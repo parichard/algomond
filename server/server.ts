@@ -22,8 +22,8 @@ import auth from './src/auth/authAPI'
     app.use('/', express.static(path.join(__dirname, '/dist')));
 
     app.use(json())
-    app.use('/api/cards', cards) // defines url in browser
-    app.use('/api/', auth)
+    app.use('/cards', cards) // defines url in browser
+    app.use('/', auth)
     app.use(cors({origin: function() {return true}}))
     app.use(function(error, req, res, next) {
         const code = error.status || 500

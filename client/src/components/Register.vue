@@ -60,11 +60,12 @@ const signupUser = async () => {
                 title: 'Account successfully created!',
                 text: 'Welcome to the Algomond fam '+ store.getters.getUsername + "!",
             })
-            const username = store.getters.getUsername
-            router.push({name: '/users', params: {username}})
+            // const username = store.getters.getUsername
+            // router.push({name: '/users', params: {username}})
+            router.push('/users')
         }
     } catch (error) {
-        errors.value.push(error)
+        errors.value.push({ msg: error.message, type: 'username'})
     }
 }
 
@@ -179,7 +180,7 @@ function verifyEmail(){
             placeholder="Username"
             v-model="signup.username"
             />
-            <p class="error" :key='i' v-for="(error, i) in errors">{{error.type === 'username' ? error.msg : ''}}</p>
+            <p class="error" :key='i' v-for="(error, i) in errors">{{error.type === 'username' ? error.msg : '&#8205;'}}</p>
         </div>
 
         <div class="mb-4">
@@ -199,7 +200,7 @@ function verifyEmail(){
             placeholder="Password"
             v-model="signup.passwordCheck"
             />
-            <p class="error" :key='i' v-for="(error, i) in errors">{{error.type === 'password' ? error.msg : ''}}</p>
+            <p class="error" :key='i' v-for="(error, i) in errors">{{error.type === 'password' ? error.msg : '&#8205;'}}</p>
         </div>
 
         <div class="mb-4">
@@ -211,7 +212,7 @@ function verifyEmail(){
             v-model="signup.email"
             />
 
-            <p class="error" :key='i' v-for="(error, i) in errors">{{error.type === 'email' ? error.msg : ''}}</p>
+            <p class="error" :key='i' v-for="(error, i) in errors">{{error.type === 'email' ? error.msg : '&#8205;'}}</p>
 
 
         </div>
