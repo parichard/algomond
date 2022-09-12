@@ -13,8 +13,8 @@ build:
   stage: build
   script:
     - cd client
-    - yarn install
-    - yarn run build
+    - npm install
+    - npm run build
     - cp -r dist ../server/
   artifacts:
     paths:
@@ -26,8 +26,8 @@ build-server:
   stage: build
   script:
     - cd server
-    - yarn install
-    - yarn run build-typescript
+    - npm install
+    - npm run build-typescript
   artifacts:
     paths:
       - server/build
