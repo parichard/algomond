@@ -12,7 +12,7 @@
     "@randlabs/myalgo-connect": "^1.2.0",
     "algosdk": "^1.19.1",
     "buffer": "^6.0.3",
-    "particles.vue3": "^2.2.4",
+    "particles.vue3": "^2.3.1",
     "rellax": "^1.12.1",
     "sweetalert2": "^11.4.32",
     "tsparticles": "^2.1.3",
