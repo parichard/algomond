@@ -58,17 +58,22 @@ export default class AuthController {
         // get user from database
         let user = await usersDAL.findOne({username: username})
         // // if user is in database
-        const check = await checkTx(username, body.wallet)
-
-        if(user && check) {
-            await usersDAL.update({username: username}, { wallet: body.wallet})
-            user = await usersDAL.findOne({username: username})
-            console.log(username + ' has saved their wallet ' + body.wallet)
-            return {
-                status: 200,
-                username: user.username,
-                token: user.token,
-                wallet: user.wallet
+        let count = 0
+        let check = false
+        while(!check && count < 6){
+            let check = await retryCheckWallet(username, body)
+            count ++
+            console.log(check, count)
+            if(user && check) {
+                await usersDAL.update({username: username}, { wallet: body.wallet})
+                user = await usersDAL.findOne({username: username})
+                console.log(username + ' has saved their wallet ' + body.wallet)
+                return {
+                    status: 200,
+                    username: user.username,
+                    token: user.token,
+                    wallet: user.wallet
+                }
             }
         }
         throw createError(404, 'Could not verify wallet')
@@ -117,19 +122,27 @@ function generateAccessToken(username) {
     }, salt)
 }
 
-async function checkTx(username, wallet){
-    console.log("checking tx on algoexplorer for user: " + username + " with wallet: " + wallet)
+async function retryCheckWallet(username, body){
+    const sleep = (millis) => {
+        return new Promise(resolve => setTimeout(resolve, millis));
+      }
+    let delay = await sleep(3000)
+    let check = await checkTx(username, body.wallet, delay)
+    return check
+}
+
+async function checkTx(username, wallet, delay){
+    console.log("checking tx on algoexplorer for user: " + username + " with wallet: " + wallet + " with delay: " + delay)
 
     // create a buffer
     const buff = Buffer.from(username, 'utf-8');
     // decode buffer as Base64
     const base64 = buff.toString('base64');
     const note = encodeURIComponent(base64)
-
-    const url = "https://algoindexer.algoexplorerapi.io/v2/accounts/"+ wallet + "/transactions?limit=1&note-prefix=" + note
-    const res = await fetch(url)
-    const data = await res.json()
     try {
+        const url = "https://algoindexer.algoexplorerapi.io/v2/accounts/"+ wallet + "/transactions?limit=1&note-prefix=" + note
+        const res = await fetch(url)
+        const data = await res.json()
         const tx = data['transactions'][0]
         if (tx['payment-transaction']['receiver']===wallet) return true
         else return false

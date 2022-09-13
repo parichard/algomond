@@ -43,7 +43,7 @@ function gotoUserpage(){
             <li><a href="https://www.randgallery.com/algo-collection/?address=ALGMD6LOC2ND6IWCPLYIRO7TC7GAMLLFNK2Y656A4FAJUI47TJ6MI4ZMNU" target="_blank">Buy Cards</a></li>
             <li><a href="http://algomondgame.000webhostapp.com/" target="_blank">Play</a></li>
             <li><router-link id="galleryurl" to="/gallery">Gallery</router-link></li>
-            <li><router-link to="/">Merch</router-link></li>
+            <!-- <li><router-link to="/">Merch</router-link></li> -->
             <li>
                 <div class="wallet-co-button">
                     <button @click="gotoUserpage">
