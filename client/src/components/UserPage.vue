@@ -88,6 +88,8 @@ const verifyWallet = async (wallet) => {
             icon: 'success',
             title: 'Successfully Linked Wallet!'
         })
+        loadingVerifyWalletStep1.value = false
+        loadingVerifyWalletStep2.value = false
         }
     } catch (error) {
          Swal.fire({
