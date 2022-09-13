@@ -57,6 +57,7 @@ const store = createStore({
                     })
                     const token = await res.json()
                     commit("changeAddress", await token)
+                    return token.status
                 } catch (error) {
                     return
                 }
@@ -76,7 +77,7 @@ const store = createStore({
                         })
                     })
                     const token = await res.json()
-                    
+
                     commit('changeAddress', token)
                     commit('updateUsername', token)
                     commit('loginSuccess', token)
@@ -102,6 +103,7 @@ const store = createStore({
                         })
                     })
                     const token = await res.json()
+
                     commit('loginSuccess', token)
                     commit('updateUsername', token)
                     return token.status
@@ -121,7 +123,9 @@ const store = createStore({
                         },
                     })
                     const token = await res.json()
+
                     commit('logoutReq', token)// clears username and token from store
+                    return token
                 } catch (error) {
                     return
                 }
@@ -138,6 +142,8 @@ const store = createStore({
                     })
                     const token = await res.json()
                     commit('removeAddress', token)
+
+                    return token
                 } catch (error) {
                     return
                 }

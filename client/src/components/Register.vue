@@ -20,7 +20,6 @@ const enableRegisterUsr: any = ref(false)
 const enableRegisterPsw: any = ref(false)
 const enableRegisterEmail: any = ref(false)
 const username = store.getters.getUsername
-console.log(username)
 if(username) {
         router.push('/users')
 }
@@ -50,6 +49,8 @@ const signupUser = async () => {
             enableRegisterUsr.value = false
             throw new Error(data['username'] + " already exists, please choose another username.")
         }
+        else if (status !== 200) throw new Error("an unknown error occured")
+
         else if (store.getters.isLoggedIn){
             Swal.fire({
                 toast: true,

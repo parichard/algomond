@@ -77,16 +77,27 @@ const getUserName = computed(() => {
 
 const verifyWallet = async (wallet) => {
     try {
-        await store.dispatch('verifyWallet', wallet) // sends request to store to verify wallet
-        Swal.fire({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        icon: 'success',
-        title: 'Successfully Linked Wallet!'
-    })
+        let status = await store.dispatch('verifyWallet', wallet) // sends request to store to verify wallet
+        if (status !== 200) throw new Error ('Unknown Error Occured')
+        if (status === 200){
+            Swal.fire({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            icon: 'success',
+            title: 'Successfully Linked Wallet!'
+        })
+        }
     } catch (error) {
+         Swal.fire({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            icon: 'error',
+            title: 'Unknown Error Occured'
+        })
         loadingVerifyWalletStep1.value = false
         loadingVerifyWalletStep2.value = false
         return
@@ -95,9 +106,19 @@ const verifyWallet = async (wallet) => {
 
 const signoutUser = async () => {
     try {
-        await store.dispatch('logout') // sends request to store for logging out
+        let status = await store.dispatch('logout') // sends request to store for logging out
         //console.log(store.getters.isLoggedIn) // store answer to say if user is now logged in (with the authentification token)
-        if (!store.getters.isLoggedIn){
+        if (status !== true){
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                icon: 'error',
+                title: 'Unknown Error Occured',
+            })
+        }
+        else if (!store.getters.isLoggedIn){
             Swal.fire({
                 toast: true,
                 position: 'top-end',
@@ -130,7 +151,28 @@ function removeWalletPopUp(){
 
 const removeWallet = async () => {
     try {
-        await store.dispatch('removeWallet') // sends request to store for logging out
+        let status = await store.dispatch('removeWallet') // sends request to store for logging out
+        if (status !== true){
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                icon: 'error',
+                title: 'Unknown Error Occured',
+            })
+        }
+        else{
+            Swal.fire({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                icon: 'success',
+                title: 'Wallet Successfully Removed',
+            })
+
+        }
     } catch (error) {
         return
     }

@@ -21,9 +21,7 @@ const verify = async () => { // user = username and login from userpage.vue
             },
         })
         const response = await res.json()
-
-        console.log(response)
-
+        response
         return true
     }
     catch (error) {

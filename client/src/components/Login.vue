@@ -46,6 +46,9 @@ const loginUser = async () => {
         loading.value = true
         let status = await store.dispatch('login', data) // sends user login input data to store.ts
         if (status === 404) errors.value.push("username and password do not match")
+        else if (status === 400) errors.value.push("username and password do not match")
+        else if (status !== 200) errors.value.push("an unknown error occured")
+        
         loading.value = false
         if (store.getters.isLoggedIn){
             Swal.fire({

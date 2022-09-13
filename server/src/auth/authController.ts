@@ -21,6 +21,7 @@ export default class AuthController {
         await usersDAL.update({username: result.username}, { token: generateAccessToken(result.username)})
         const res = await usersDAL.findOne({username: result.username})
         return {
+            status: 200,
             id: res.id,
             username: res.username,
             token: res.token
@@ -42,6 +43,7 @@ export default class AuthController {
             user = await usersDAL.findOne({username: body.username})
             console.log(user.username + ' is logged in at date: ' + Date.now())
             return {
+                status: 200,
                 username: user.username,
                 token: user.token,
                 wallet: user.wallet
@@ -63,6 +65,7 @@ export default class AuthController {
             user = await usersDAL.findOne({username: username})
             console.log(username + ' has saved their wallet ' + body.wallet)
             return {
+                status: 200,
                 username: user.username,
                 token: user.token,
                 wallet: user.wallet
@@ -76,6 +79,7 @@ export default class AuthController {
         const user = await usersDAL.findOne({username: username})
         if(user) {
             return {
+                status:200,
                 username: user.username
             }
         }
