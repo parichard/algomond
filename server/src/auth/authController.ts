@@ -116,7 +116,7 @@ export default class AuthController {
 function generateAccessToken(username) {
     console.log("\rAuthController@generateToken");
     return jwt.sign({
-        exp: Math.floor(Date.now() / 1000) + (60 * 60),
+        //exp: Math.floor(Date.now() / 1000) + (60 * 60),
         expiresIn: "60d",
         data: username
     }, salt)

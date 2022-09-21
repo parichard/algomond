@@ -23,6 +23,7 @@ export const create = async (body) => {
     order: body.order,
     rarity: body.rarity,
     rarityRank: body.rarityRank,
+    mondScore: body.mondScore,
     total: body.total,
     url: body.url
 })

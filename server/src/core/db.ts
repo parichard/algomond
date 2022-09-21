@@ -44,6 +44,7 @@ type Card = {
   order: number // eg: Umbrella Lizard is number 1, Big Bullies is number 2, etc.
   rarity: string // eg: none, A, S, XMAS, AMO, G, R
   rarityRank: number // eg: 0,1,2,3 or 4
+  mondScore: number // how many $MOND per week for staking
   total: number// how many were minted, 1, 30, 50, 150, 500, 1000
   url: string // were source image is stored
 }
@@ -98,6 +99,15 @@ function createCardObject(asset: Asset): Card {
     'S': 3,
     'AMO': 4,
   }
+  const mondScoreMap = {
+    '': 2,
+    'R': 2,
+    'G': 2,
+    'A': 6,
+    'XMAS': 20,
+    'S': 20,
+    'AMO': 30,
+  }
 
   const unitName = asset.unitName.substring(1)
   let assetName = asset.cardName.replace("ALGOMOND ", "").replace("- ", "").split(" ")
@@ -108,6 +118,7 @@ function createCardObject(asset: Asset): Card {
   const order = Number(unitName.replace(/[a-zA-Z]/g,""))
   const rarity = unitName.replace(/[0-9]/g,"")
   const rarityRank = rarityMap[rarity]
+  const mondScore = mondScoreMap[rarity]
   const total = Number(asset.total)
   const url = String(asset.url)
 
@@ -121,6 +132,7 @@ function createCardObject(asset: Asset): Card {
     order,
     rarity,
     rarityRank,
+    mondScore,
     total,
     url
   }

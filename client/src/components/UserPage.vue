@@ -13,49 +13,66 @@ const router = useRouter()
 
 const loadingVerifyWalletStep1: any = ref(false)
 const loadingVerifyWalletStep2: any = ref(false)
+const loadingVerifyWalletStep3: any = ref(false)
+const loadingVerifyWalletStep4: any = ref(false)
+const MOND = ref(0)
+const MONDweekly = ref(0)
 
 const errors = ref([])
 
 const myAlgoConnect = new MyAlgoConnect();
 const algodClient = new algosdk.Algodv2('','https://node.algoexplorerapi.io', '');
 
+getMOND()
+
 async function connectWallet() {
-    const myAlgoConnect = new MyAlgoConnect({ disableLedgerNano: false });
+    try{
+        const myAlgoConnect = new MyAlgoConnect({ disableLedgerNano: false });
 
-    const settings = {
-        shouldSelectOneAccount: true,
-        openManager: false
-    };
+        const settings = {
+            shouldSelectOneAccount: true,
+            openManager: false
+        };
 
-    const accounts = await myAlgoConnect.connect(settings);
-    return accounts[0].address
+        const accounts = await myAlgoConnect.connect(settings);
+        return accounts[0].address
+    }
+    catch{
+        loadingVerifyWalletStep1.value = false
+        loadingVerifyWalletStep2.value = false
+        loadingVerifyWalletStep3.value = false
+        loadingVerifyWalletStep4.value = false
+    }
 }
 async function maketxs(){
-    loadingVerifyWalletStep1.value = true
-    const wallet = await connectWallet()
-    loadingVerifyWalletStep2.value = true
-    const suggestedParams = await algodClient.getTransactionParams().do()
-    const amountInMicroAlgos = algosdk.algosToMicroalgos(0)
-    const username = store.getters.getUsername
-    let utf8Encode = new TextEncoder();
-    const note = utf8Encode.encode(username)
+    try{
+        loadingVerifyWalletStep1.value = true
+        const wallet = await connectWallet()
+        loadingVerifyWalletStep2.value = true
+        const suggestedParams = await algodClient.getTransactionParams().do()
+        const amountInMicroAlgos = algosdk.algosToMicroalgos(0)
+        const username = store.getters.getUsername
+        let utf8Encode = new TextEncoder();
+        const note = utf8Encode.encode(username)
 
-    const unsignedTxn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
-        from: wallet,
-        to: wallet,
-        note: note,
-        amount: amountInMicroAlgos,
-        suggestedParams: suggestedParams,
-    })
-    const signedTxn = await myAlgoConnect.signTransaction(unsignedTxn.toByte())
-    const response = await algodClient.sendRawTransaction(signedTxn.blob).do()
-    try {
+        const unsignedTxn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
+            from: wallet,
+            to: wallet,
+            note: note,
+            amount: amountInMicroAlgos,
+            suggestedParams: suggestedParams,
+        })
+        const signedTxn = await myAlgoConnect.signTransaction(unsignedTxn.toByte())
+        loadingVerifyWalletStep3.value = true
+        const response = await algodClient.sendRawTransaction(signedTxn.blob).do()
         response
         verifyWallet(wallet)
     }
     catch(error){
         loadingVerifyWalletStep1.value = false
         loadingVerifyWalletStep2.value = false
+        loadingVerifyWalletStep3.value = false
+        loadingVerifyWalletStep4.value = false
         return
     }
 }
@@ -77,6 +94,7 @@ const getUserName = computed(() => {
 
 const verifyWallet = async (wallet) => {
     try {
+        loadingVerifyWalletStep4.value = true
         let status = await store.dispatch('verifyWallet', wallet) // sends request to store to verify wallet
         if (status !== 200) throw new Error ('Unknown Error Occured')
         if (status === 200){
@@ -90,6 +108,9 @@ const verifyWallet = async (wallet) => {
         })
         loadingVerifyWalletStep1.value = false
         loadingVerifyWalletStep2.value = false
+        loadingVerifyWalletStep3.value = false
+        loadingVerifyWalletStep4.value = false
+        getMOND()
         }
     } catch (error) {
          Swal.fire({
@@ -102,6 +123,8 @@ const verifyWallet = async (wallet) => {
         })
         loadingVerifyWalletStep1.value = false
         loadingVerifyWalletStep2.value = false
+        loadingVerifyWalletStep3.value = false
+        loadingVerifyWalletStep4.value = false
         return
     }
 }
@@ -173,7 +196,7 @@ const removeWallet = async () => {
                 icon: 'success',
                 title: 'Wallet Successfully Removed',
             })
-
+            getMOND()
         }
     } catch (error) {
         return
@@ -184,13 +207,91 @@ function gotogallery(){
     router.push('/gallery')
 }
 
+function getMOND()
+{
+    if (store.getters.getAddress){
+        getMONDqty()
+        getMONDweekly()
+    }
+    else {
+        MOND.value = 0
+        MONDweekly.value = 0
+    }
+}
+async function getMONDqty() {
+    const url = "https://algoindexer.algoexplorerapi.io/v2/accounts/" + store.getters.getAddress
+    const res = await fetch(url)
+    const data = await res.json()
+    const assets = data['account']['assets']
+    let check = false
+    assets.every(asset => {
+        if(asset["asset-id"] === 871370770)
+        {
+            MOND.value = parseInt(asset["amount"])
+            check = false
+            return false // breaks the "every" loop
+        }
+        check = true
+        return true // keeps the "every" loop going
+    });
+    if (check) MOND.value = 0 // if check is true, it means loop has not found MOND asset in wallet, so MOND qty = 0
+}
+
+async function getMONDweekly(){
+    // first fetch staking scores from database
+    try {
+        const res: any = await fetch('/api/cards', { // /api = proxy to server (vite.config.ts) -> localhost:3000/
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
+        const dbcards = await res.json()
+
+    // then fetch asset IDs from user's wallet
+        const dbcardsIDs = []
+        const dbcardsMOND = []
+        
+        let userMONDperweek = 0
+        const url = "https://algoindexer.algoexplorerapi.io/v2/accounts/" + store.getters.getAddress
+        const ans = await fetch(url)
+        const data = await ans.json()
+        const assets = data['account']['assets']
+
+        dbcards.forEach(card => {
+            dbcardsIDs.push(card["assetId"])
+            dbcardsMOND.push(card["mondScore"])
+        })
+        assets.forEach(asset => {
+            if(dbcardsIDs.includes(asset["asset-id"])){
+                const i = dbcardsIDs.indexOf(asset["asset-id"])
+                userMONDperweek = userMONDperweek + dbcardsMOND[i]*asset["amount"]
+            }
+        })
+        MONDweekly.value = userMONDperweek
+    } catch (error) {
+        return
+    }
+}
+
 </script>
 
 <template>
     <div class="w-full md:w-4/12 p-6 rounded-lg mx-auto mt-24 formback">
         <!-- UserPage -->
-        <h1>{{getUserName}}</h1>
-            <hr />
+
+        <p class="title">
+            {{getUserName}}
+            <ul class="mond-list">
+                <li><span class="right mond">{{MOND}} $MOND</span></li>
+                <li><span class="right mond-weekly">{{MONDweekly}} $MOND/week</span></li>
+            </ul>
+        </p>
+
+        <hr/>
+        
+
         <div class="wallet-info" v-if="store.getters.hasWalletConnected">
 
             <div class="inline" v-if="store.getters.hasWalletConnected">
@@ -207,7 +308,9 @@ function gotogallery(){
             <div v-if="!store.getters.hasWalletConnected">
                 <button class="button linkalgowalletbutton" @click="maketxs()">
                     <p v-if="loadingVerifyWalletStep1===false">Link Algorand Wallet to account</p>
-                    <p v-if="loadingVerifyWalletStep2===true">Step 2/2: Sign 0 Algo Transaction</p>
+                    <p v-if="loadingVerifyWalletStep4===true">Adding wallet to our Database...</p>
+                    <p v-else-if="loadingVerifyWalletStep3===true">Sending tx to blockchain...</p>
+                    <p v-else-if="loadingVerifyWalletStep2===true">Step 2/2: Sign 0 Algo Transaction</p>
                     <p v-else-if="loadingVerifyWalletStep1===true">Step 1/2: Connect Wallet</p>
                     <img v-if="loadingVerifyWalletStep1===true" class="center-image" src="/img/loading_3_dots.svg" alt="loading">
                 </button>
@@ -234,15 +337,23 @@ function gotogallery(){
     $pad: 0.75em
     $marg: 0.5em
 
-    h1
+    .title
         font-size: 2em
-        display: block
-
-    .inline
-        display: inline-flex
-        align-items: center
-
+        margin-bottom: 10px
+    .left
+        text-align: left
+        float: left
+    .mond-list
+        display: inline
+        float: right
+    .right
+        float: right
+    .mond
+        font-size: 0.5em
+    .mond-weekly
+        font-size: 0.4em
     .wallet-info
+        margin-top: 10px
         align-items: center
     .buttons
         display: inline-flex

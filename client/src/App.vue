@@ -75,7 +75,18 @@ html {
     position: relative;
     scroll-behavior: smooth;
     min-height: 100%;
+    overflow-y: scroll;
     /* height: 100%; */
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+html::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;/* Firefox */
 }
 
 #tsparticles {
