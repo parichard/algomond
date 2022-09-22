@@ -125,10 +125,10 @@
         </div>
         <!-- <img class="cards" :key='i' v-for="(card, i) in cardObjectsList" :src="'img/cards_artwork/'+ card['source']" alt="" width="250" height="300"> -->
             <div class="align-center">
-                <div class="inline-flex m-2" :key='i' v-for="(card, i) in cardObjectsList">
-                    <div>
+                <div class="cardsize inline-flex m-2" :key='i' v-for="(card, i) in cardObjectsList">
+                    <div class="cardcomp">
                         <p>M{{card['order']}}{{card['rarityName']}} {{card['name']}}</p>
-                        <a :href="'https://algoexplorer.io/asset/'+card['assetID']" target="_blank"><img draggable="false" :src="'img/cards_artwork/'+ card['source']" :class="card['amount'] > 0 ? 'cards' : 'cards-grey'" width="200" height="250"></a>
+                        <a :href="'https://algoexplorer.io/asset/'+card['assetID']" target="_blank"><img draggable="false" :src="'img/cards_artwork/'+ card['source']" :class="card['amount'] > 0 ? 'cards' : 'cards-grey'"></a>
                         <p>Amount: {{card['amount']}}</p>
                     </div>
                 </div>
@@ -173,5 +173,33 @@ img:hover{
 }
 .align-center{
    text-align:center;
+}
+.cardsize{
+    width:14%;
+}
+.cardsize .cardcomp p{
+        font-size: 0.8em;
+        height: 1.5em;
+    }
+@media only screen and (max-width: 900px){
+    .cardsize{
+        width: 20%;
+    }
+    .cardsize .cardcomp p{
+        font-size: 0.8em;
+    }
+}
+@media only screen and (max-width: 600px){
+    .cardsize{
+        width: 28%;
+    }
+    .cardsize .cardcomp p{
+        font-size: 0.8em;
+    }
+}
+@media only screen and (max-width: 400px){
+    .cardsize{
+        width: 42%;
+    }
 }
 </style>

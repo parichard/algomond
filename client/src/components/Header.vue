@@ -30,6 +30,22 @@ function gotoUserpage(){
         router.push('/login')
     }
 }
+
+function responsive() {
+  let x = document.getElementById("socialtabs");
+  if (x.className === "socials") {
+    x.className += "responsive";
+  } else {
+    x.className = "socials";
+  }
+  let y = document.getElementById("maintabs");
+  if (y.className === "tab") {
+    y.className += "responsive";
+  } else {
+    y.className = "tab";
+  }
+}
+
 </script>
 
 <template>
@@ -38,9 +54,9 @@ function gotoUserpage(){
             <img src="/img/Algomond_LOGO_white_on_black.svg" alt="Algomond Logo">
             <h2 class="logo">ALGOMOND</h2>
         </a>
-        <ul class="tab">
+        <ul id="maintabs" class="tab">
             <li><router-link to="/">Home</router-link></li>
-            <li><a href="https://www.randgallery.com/algo-collection/?address=ALGMD6LOC2ND6IWCPLYIRO7TC7GAMLLFNK2Y656A4FAJUI47TJ6MI4ZMNU" target="_blank">Buy Cards</a></li>
+            <li><a href="https://www.randgallery.com/algo-collection/?address=ALGMD6LOC2ND6IWCPLYIRO7TC7GAMLLFNK2Y656A4FAJUI47TJ6MI4ZMNU" target="_blank">Store</a></li>
             <li><a href="http://algomondgame.000webhostapp.com/" target="_blank">Play</a></li>
             <li><router-link id="galleryurl" to="/gallery">Gallery</router-link></li>
             <!-- <li><router-link to="/">Merch</router-link></li> -->
@@ -55,7 +71,7 @@ function gotoUserpage(){
             </li>
         </ul>
 
-        <ul>
+        <ul id="socialtabs" class="socials">
             <li class="icon-list"><a href="https://www.reddit.com/r/algomond" target="_blank">
                 <img src="/img/reddit.svg" alt="reddit link" class="icon">
             </a></li>
@@ -69,6 +85,9 @@ function gotoUserpage(){
                 <img src="/img/twitter.svg" alt="twitter link" class="icon">
             </a></li>
         </ul>
+        <a href="javascript:void(0);" @click="responsive" class="dropdown">
+            <img class="icon" id="dropdown-menu" src="/img/menu-fill.svg" alt="dropdown menu icon">
+        </a>
     </nav>
 </template>
 
@@ -246,6 +265,105 @@ nav .tab a:active {
     color: #eeff00;
     -webkit-transition: 0.1s;
     transition: 0.1s;
+}
+nav .dropdown{
+    display: none;
+}
+
+
+
+@media only screen and (max-width: 900px){
+
+nav .logo {
+    display: none;
+}
+nav ul li .wallet-co-button {
+margin-left: 1rem;
+}
+nav ul li a {
+    font-size: 0.8em;
+    padding-right: 0.9rem;
+    padding-left: 0.9rem;
+}
+nav .dropdown{
+    display:inherit;
+    margin: 0;
+    padding: 0;
+    scale: 1.1;
+}
+nav .socials{
+    display:none;
+}
+nav .socialsresponsive{
+    padding: 20px 10px;
+    display: inherit;
+    position: absolute;
+    top: 50px;
+    border-radius: 10px;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.86);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+} 
+}
+
+@media only screen and (max-width: 500px){
+nav .tab{
+    display:none;
+}
+nav .dropdown{
+    scale: 1.3;
+}
+nav .socialsresponsive{
+    padding: 220px 5px 10px 20px;
+    display: inherit;
+    position: absolute;
+    top: 50px;
+    border-radius: 10px;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.86);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+} 
+nav .tabresponsive{
+    padding: 10px 5px 10px 5px;
+    float: none;
+    display: block;
+    position: absolute;
+    top: 50px;
+    border-radius: 10px;
+    right: 0;
+    z-index: 2;
+    /* background-color: rgba(0, 0, 0, 0.86);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px); */
+} 
+nav .tabresponsive a:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+nav .tabresponsive a:active {
+    color: #e5ff00;
+    -webkit-transition: 0.05s;
+    transition: 0.05s;
+}
+
+nav .tabresponsive li {
+    font-size: 1.35em;
+    padding: 0px;
+    margin: 1px;
+    display: flex;
+}
+nav .tabresponsive li .wallet-co-button {
+    margin-left: 0rem;
+}
+nav .tabresponsive li a{
+    border-radius: 5px;
+    width: 100%;
+    padding: 2px;
+    margin: 2px;
+}
 }
 
 </style>

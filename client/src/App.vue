@@ -421,4 +421,195 @@ footer .smoke-bottom {
     z-index: -2;
 }
 
+@media only screen and (max-width: 1000px){
+    .animated-circles {
+        display: none;
+    }
+    .hero .text {
+    margin-top: 8em;
+    margin-right: 30%;
+    margin-left: 10%;
+    margin-bottom: 6em;
+    }
+    .hero .text h1 {
+    font-size: 2.6em;
+    font-weight: normal;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    }
+}
+@media only screen and (max-width: 600px){
+
+    .hero .text {
+    margin-top: 8em;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-bottom: 4em;
+    }
+    .hero .text h1 {
+    font-size: 1.9em;
+    font-weight: normal;
+    margin-bottom: 0.5em;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    }
+    .hero .text h4 {
+    font-size: 0.8em;
+    font-weight: normal;
+    margin-right: 5%;
+    }
+section h2 {
+    font-size: 1.65em;
+    margin-left: 8%;
+    margin-top: 12%;
+    margin-bottom: 0%;
+    font-weight: normal;
+    }
+    section p {
+    margin-top: 3%;
+    margin-left: 20%;
+    margin-right: 20%;
+    font-size: 0.8em;
+}
+section .tablediv {
+    margin-top: 4rem;
+    margin-left: 15%;
+    margin-bottom: 12rem;
+}
+
+section .tablediv table {
+    vertical-align: middle;
+}
+
+section .tablediv table img {
+    margin: 0.5rem;
+    margin-bottom: 1.5rem;
+    width: 4.5rem;
+}
+
+section .tablediv table .text {
+    padding-left: 1rem;
+    font-size: 0.8em;
+}
+
+section .tablediv table .text a img {
+    height: 2rem;
+    width: 2rem;
+    -webkit-filter: invert(100%);
+    filter: invert(100%);
+    margin: 0;
+    padding: 0;
+    margin-top: 0.5rem;
+}
+footer p {
+    font-size: 0.72em;
+    bottom: 0;
+    padding-bottom: 0.5rem;
+}
+section img {
+    margin-top: 3rem;
+    width: 100%;
+}
+
+section .roadmap {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    display: block;
+}
+section .partners {
+    margin-top: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+section .partners a {
+    width: 40%;
+    margin-left: 8%;
+    margin-right: 8%;
+}
+
+section .partners a .encode {
+    width: 85%;
+}
+
+section .partners a:hover {
+    -webkit-transform: scale(1.01);
+    transform: scale(1.01);
+}
+
+section .partners .partners-glow-encode {
+    position: absolute;
+    width: 50%;
+    right: 0%;
+    margin-top: 6.75%;
+    opacity: 0.42;
+    z-index: -1;
+}
+
+section .partners .partners-glow-algo {
+    position: absolute;
+    width: 50%;
+    left: 0%;
+    margin-top: 6.75%;
+    opacity: 0.42;
+    z-index: -1;
+}
+.dragon-background {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -3;
+    opacity: 0.055;
+    z-index: -3;
+}
+
+.dragon-background img {
+    width: 100%;
+}
+
+.stars-top {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 55%;
+    z-index: -1;
+    -webkit-animation: fadeIn 1.5s;
+    animation: fadeIn 1.5s;
+}
+
+.stars-mid {
+    position: absolute;
+    left: 0px;
+    z-index: -1;
+    width: 35%;
+    -webkit-animation: fadeIn 1.5s;
+    animation: fadeIn 1.5s;
+}
+.hero .arrow {
+    position: relative;
+    width: 14%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    -webkit-animation: mymove 1.3s infinite;
+    animation: mymove 1.3s infinite;
+    -webkit-animation-direction: alternate;
+    animation-direction: alternate;
+}
+
+
+}
+
 </style>
