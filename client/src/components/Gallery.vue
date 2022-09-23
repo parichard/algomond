@@ -113,15 +113,15 @@
                 v-model="address"
                 v-if="store.getters.getAddress"
                 :placeholder="store.getters.getAddress" 
-                class="m-14 w-3/4 p-2 bg-gray-800 border-2" 
+                class="my-14 mx-7 mr-0 w-3/4 p-2 bg-gray-800 border-2" 
                 type="text">
             <input 
                 v-model="address"
                 v-if="!store.getters.getAddress"
                 :placeholder="'Enter wallet address'" 
-                class="m-14 w-3/4 p-2 bg-gray-800 border-2" 
+                class="my-14 mx-7 mr-0 w-3/4 p-2 bg-gray-800 border-2" 
                 type="text">
-            <button class="inline-block px-6 py-2.5 bg-gray-800 text-white font-medium text-xs leading-tight uppercase shadow-md hover:bg-gray-900 hover:shadow-lg focus:bg-gray-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-900 active:shadow-lg transition duration-150 ease-in-out" @click="getAccount">Submit</button>
+            <button class="inline-flex ml-5 px-3 py-4 bg-gray-800 text-white font-medium text-xs leading-tight uppercase shadow-md hover:bg-gray-900 hover:shadow-lg focus:bg-gray-900 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-900 active:shadow-lg transition duration-150 ease-in-out" @click="getAccount">Submit</button>
         </div>
         <!-- <img class="cards" :key='i' v-for="(card, i) in cardObjectsList" :src="'img/cards_artwork/'+ card['source']" alt="" width="250" height="300"> -->
             <div class="align-center">

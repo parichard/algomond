@@ -44,6 +44,12 @@ function responsive() {
   } else {
     y.className = "tab";
   }
+  let z = document.getElementById("dropdown");
+  if (z.className === "nav-icon") {
+    z.className += "responsive";
+  } else {
+    z.className = "nav-icon";
+  }
 }
 
 </script>
@@ -85,8 +91,15 @@ function responsive() {
                 <img src="/img/twitter.svg" alt="twitter link" class="icon">
             </a></li>
         </ul>
-        <a href="javascript:void(0);" @click="responsive" class="dropdown">
+        <!-- <a href="javascript:void(0);" @click="responsive" class="dropdown">
             <img class="icon" id="dropdown-menu" src="/img/menu-fill.svg" alt="dropdown menu icon">
+        </a> -->
+
+        <!-- <a href="javascript:void(0);" @click="responsive" class="dropdown">
+            <img class="icon" id="dropdown-menu" src="/img/cross.svg" alt="dropdown menu icon">
+        </a> -->
+        <a href="javascript:void(0);" @click="responsive" class="nav-icon" id="dropdown">
+            <div></div>
         </a>
     </nav>
 </template>
@@ -137,6 +150,7 @@ nav .logo {
     font-weight: normal;
     font-size: 1.1em;
     margin: 0;
+    transition: 0.75s;
 }
 
 nav ul {
@@ -269,6 +283,12 @@ nav .tab a:active {
 nav .dropdown{
     display: none;
 }
+.nav-icon{
+    display: none;
+}
+.nav-iconresponsive{
+    display: none;
+}
 
 
 
@@ -291,6 +311,53 @@ nav .dropdown{
     padding: 0;
     scale: 1.1;
 }
+.nav-icon {
+    display:block;
+    margin: 0.2em;
+    width: 30px;
+}
+
+.nav-icon:after, 
+.nav-icon:before, 
+.nav-icon div {
+  background-color: #fff;
+  border-radius: 3px;
+  content: '';
+  display: block;
+  height: 3px;
+  margin: 5px 0;
+  transition: all .2s ease-in-out;
+}
+
+.nav-iconresponsive {
+    display:block;
+    margin: 0.2em;
+    width: 30px;
+}
+.nav-iconresponsive:before {
+  transform: translateY(8px) rotate(135deg);
+}
+
+.nav-iconresponsive:after {
+  transform: translateY(-8px) rotate(-135deg);
+}
+
+.nav-iconresponsive:after,
+.nav-iconresponsive:before,
+.nav-iconresponsive div {
+background-color: #fff;
+  border-radius: 3px;
+  content: '';
+  display: block;
+  height: 3px;
+  margin: 5px 0;
+  transition: all .2s ease-in-out;
+}
+
+.nav-iconresponsive div{
+    scale:0;
+}
+
 nav .socials{
     display:none;
 }
