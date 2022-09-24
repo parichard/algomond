@@ -52,6 +52,12 @@ function responsive() {
   }
 }
 
+// document.onclick=function(){
+//     let x = document.getElementById("socialtabs");
+//     if(x.className === "socialsresponsive" && toggle === true){responsive();};
+// }
+
+
 </script>
 
 <template>
@@ -91,13 +97,7 @@ function responsive() {
                 <img src="/img/twitter.svg" alt="twitter link" class="icon">
             </a></li>
         </ul>
-        <!-- <a href="javascript:void(0);" @click="responsive" class="dropdown">
-            <img class="icon" id="dropdown-menu" src="/img/menu-fill.svg" alt="dropdown menu icon">
-        </a> -->
 
-        <!-- <a href="javascript:void(0);" @click="responsive" class="dropdown">
-            <img class="icon" id="dropdown-menu" src="/img/cross.svg" alt="dropdown menu icon">
-        </a> -->
         <a href="javascript:void(0);" @click="responsive" class="nav-icon" id="dropdown">
             <div></div>
         </a>
@@ -401,9 +401,6 @@ nav .tabresponsive{
     border-radius: 10px;
     right: 0;
     z-index: 2;
-    /* background-color: rgba(0, 0, 0, 0.86);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(5px); */
 } 
 nav .tabresponsive a:hover {
     background-color: whitesmoke;
