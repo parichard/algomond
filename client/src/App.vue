@@ -18,7 +18,8 @@ const particlesInit = async (engine) => {
 // const count = computed(() => {
 //     return (Math.round(document.body.scrollHeight/20))
 // })
-
+const count = Math.round(window.screen.width/7)
+// console.log(count)
 const config = ref({
     fpsLimit: 60,
     fullScreen: { enable: false},
@@ -33,7 +34,7 @@ const config = ref({
             speed: 0.35,
             straight: false,
         },
-        number: { density: { enable: false, area: 1000 }, value: 200 },
+        number: { density: { enable: false, area: 1000 }, value: count },
         opacity: {
             value: 0.5,
         },
