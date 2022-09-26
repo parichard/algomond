@@ -69,7 +69,7 @@ function responsive() {
         <ul id="maintabs" class="tab">
             <li><router-link to="/">Home</router-link></li>
             <li><a href="https://www.randgallery.com/algo-collection/?address=ALGMD6LOC2ND6IWCPLYIRO7TC7GAMLLFNK2Y656A4FAJUI47TJ6MI4ZMNU" target="_blank">Store</a></li>
-            <li><a href="https://algomondgame.com/" target="_blank">Play</a></li>
+            <li><a href="http://algomondgame.com/" target="_blank">Play</a></li>
             <li><router-link id="galleryurl" to="/gallery">Gallery</router-link></li>
             <!-- <li><router-link to="/">Merch</router-link></li> -->
             <li>
