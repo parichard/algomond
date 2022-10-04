@@ -422,6 +422,41 @@ footer .smoke-bottom {
     z-index: -2;
 }
 
+@media only screen and (min-width: 1500px){
+    .hero .text h1 {
+        font-size: 4.2em;
+    }
+    .hero .text h4 {
+        font-size: 1.4em;
+    }
+    .hero .arrow {
+        width: 6%;
+    }
+    .animated-circles {
+        position: absolute;
+        width: 9%;
+        top: 120px;
+        left: 4.3%;
+    }
+    section p {
+        font-size: 1.32em;
+    }
+
+    section .tablediv {
+        margin-top: 8rem;
+        margin-left: 15%;
+        margin-bottom: 24rem;
+    }
+    section .tablediv table img {
+        margin: 1rem;
+        width: 8rem;
+    }
+    section .tablediv table .text {
+        padding-left: 1rem;
+        font-size: 1.2em;
+    }
+}
+
 @media only screen and (max-width: 1000px){
     .animated-circles {
         display: none;
