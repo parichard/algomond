@@ -6,6 +6,7 @@ import Gallery from './components/Gallery.vue'
 import UserPage from './components/UserPage.vue'
 import Login from './components/Login.vue'
 import Register from './components/Register.vue'
+import Shuffle from './components/Shuffle.vue'
 
 const verify = async () => { // user = username and login from userpage.vue
     try{
@@ -56,6 +57,10 @@ const routes: any = [
         path: '/users',
         component: UserPage,
         beforeEnter: verifyAuth,
+    },
+    {
+        path: '/shuffle',
+        component: Shuffle
     },
 ]
 

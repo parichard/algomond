@@ -37,11 +37,15 @@ import Header from './Header.vue'
         <section class="reveal">
             <h2>Our Partners.</h2>
             <div class="partners">
-                <img class="partners-glow-algo" src="/img/encode_glow.png" alt="glow effect">
+                <!-- <img class="partners-glow-algo" src="/img/encode_glow.png" alt="glow effect"> -->
                 <a href="https://algorand.foundation/news/algomond-grant" target="_blank">
                     <img class="partnerlogo" src="/img/algorand-foundation-logo_white_500px.png" alt="algorand foundation logo">
                 </a>
-                <img class="partners-glow-encode" src="/img/encode_glow.png" alt="glow effect">
+                <!-- <img class="partners-glow-gradian" src="/img/encode_glow.png" alt="glow effect"> -->
+                <a href="https://gradian.network/" target="_blank">
+                    <img class="partnerlogo gradian" src="/img/gradian.png" alt="gradian logo">
+                </a>
+                <!-- <img class="partners-glow-encode" src="/img/encode_glow.png" alt="glow effect"> -->
                 <a href="https://youtu.be/Pmzy33Bj5Tc" target="_blank">
                     <img class="partnerlogo encode" src="/img/encode_club_white_01.png" alt="encode club logo">
                 </a>
@@ -55,15 +59,15 @@ import Header from './Header.vue'
                     <td><img src="/img/grumpy_squid_paul.png" alt="founder paul profile picture"></td>
                     <td class="text">Paul RICHARD - @majicien <br> Founder, Web dev, Artist.<br>
                         <a href="https://www.linkedin.com/in/paul-richard-4a51361a7/" target="_blank">
-                            <img src="/img/linkedin.svg" alt="Paul Richard's linked in profile link">
+                            <img src="/img/linkedin.svg" alt="Paul Richard's linkedIn profile link">
                         </a>
                     </td>
                     </tr>
                     <tr>
-                    <td><img src="/img/big_bullies_josh.png" alt="co-founder josh profile picture"></td>
-                    <td class="text">Josh WEST - @emploded <br> Co-Founder, Game dev.<br>
-                        <a href="https://www.linkedin.com/in/josh-west-b50214153" target="_blank">
-                            <img src="/img/linkedin.svg" alt="Josh West's linked in profile link">
+                    <td><img src="/img/tiny_mag_anto.png" alt="antonin profile picture"></td>
+                    <td class="text">Antonin POLY - @crazyblu <br> Advisor, Web dev.<br>
+                        <a href="https://www.linkedin.com/in/antonin-poly-kerneis/" target="_blank">
+                            <img src="/img/linkedin.svg" alt="Antonin Poly's linkedIn profile link">
                         </a>
 
                     </td>

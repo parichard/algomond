@@ -295,12 +295,15 @@ section .partners {
 }
 
 section .partners a {
-    width: 20%;
-    margin-left: 12%;
-    margin-right: 12%;
+    width: 30%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 section .partners a .encode {
+    width: 75%;
+}
+section .partners a .gradian {
     width: 85%;
 }
 
@@ -570,13 +573,13 @@ section .partners {
 }
 
 section .partners a {
-    width: 40%;
-    margin-left: 8%;
-    margin-right: 8%;
+    /* width: 100%; */
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 section .partners a .encode {
-    width: 85%;
+    width: 75%;
 }
 
 section .partners a:hover {
