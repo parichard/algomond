@@ -17,7 +17,7 @@ import Header from './Header.vue'
             <div class="text">
                 <h1>Bringing the <b>Algomond</b> magic to Algorand.</h1>
                 <h4>Algomond is an NFT trading cards video game with hand drawn fun and spooky
-                monsters built on the algorand blockchain and the unity game engine.</h4>
+                monsters built on the Algorand blockchain.</h4>
             </div>
             <img class="arrow" src="/img/arrow_down.svg" alt="arrow_down">
         </section>
