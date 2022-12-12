@@ -10,60 +10,13 @@
 
     const cards = ref([])
     const cardObjectsList = ref([])
+    const dbcards = ref([])
+    
     if (store.getters.getAddress){
         getAccount()
     }
     else {
-        populateListOfCardsObj()
-    }
-
-    function cardObject(name, order, rarityRank, rarityName, assetID, amount, source) {
-      this.name = name;
-      this.order = order;
-      this.rarityRank = rarityRank;
-      this.rarityName = rarityName;
-      this.assetID = assetID;
-      this.amount = amount;
-      this.source = source;
-    }
-
-    function populateListOfCardsObj(){
-        cardFilesList.forEach(sourceFile=>{
-            let card = sourceFile;
-            card = card.substring(1);
-            var myArray = card.split("_");
-            var cardArray = ['order', 'name','assetID', 'rarityRank','rarityName'];
-            let regex = /[a-zA-Z]/g;
-            
-            myArray[3] = myArray[0];
-            myArray[3] = myArray[3].replace(/[0-9]/g,"");
-            myArray[4] = myArray[3];
-            myArray[2] = myArray[2].replace(regex, "");
-            myArray[2] = myArray[2].replace('.', "");
-            myArray[0] = myArray[0].replace(regex, "");
-
-            if(myArray[3]===""){myArray[3]="0";}
-            else if(myArray[3]==="R"){myArray[3]="0";}
-            else if(myArray[3]==="G"){myArray[3]="0";}
-            else if(myArray[3]==="A"){myArray[3]="1";}
-            else if(myArray[3]==="XMAS"){myArray[3]="2";}
-            else if(myArray[3]==="S"){myArray[3]="3";}
-            else if(myArray[3]==="AMO"){myArray[3]="4";}
-            var order = myArray[0];
-            var name = myArray[1];
-            var assetId = myArray[2];
-            var rarityRank = myArray[3];
-            var rarityName = myArray[4];
-
-            cardObjectsList.value.push(new cardObject(name, order, rarityRank, rarityName, assetId, 0, sourceFile));
-        })
-        cardObjectsList.value.sort((a, b) => {
-            return a.rarityRank - b.rarityRank;
-        });
-        cardObjectsList.value.sort((a, b) => {
-            return a.order - b.order;
-        });
-        //console.log(cardObjectsList);
+        getCardsDetailsDB()
     }
 
     async function getAccount()
@@ -73,30 +26,24 @@
             const url = "https://mainnet-idx.algonode.cloud/v2/accounts/" + walletAddress
             const res = await fetch(url)
             const data = await res.json()
-            const assets = data['account']['assets']
-            if (cardObjectsList.value.length > 0){cardObjectsList.value.length = 0}
-            populateListOfCardsObj()
+            const userassets = data['account']['assets']
+            if (dbcards.value.length > 0){dbcards.value.length = 0}
+            const getCardDetails = await getCardsDetailsDB()
+            getCardDetails
             //get the asset and corresponding amount for each algomond asset in the user's wallet
-            assets.forEach((element:any) => {
-                const assetId = element['asset-id']
-                const amount = element['amount']
-                if (assetIDs.includes(assetId)){ //checks if an asset ID is an Algomond ID for each asset in user's wallet
-                    cards.value.push(assetId)
-                    var index = cardObjectsList.value.findIndex(obj => obj.assetID === String(assetId));
-                        //console.log(index);
+            userassets.forEach((element:any) => {
+                const userassetId = element['asset-id']
+                const useramount = element['amount']
+                if (assetIDs.includes(userassetId)){ //checks if an asset ID is an Algomond ID for each asset in user's wallet
+                    var index = dbcards.value.findIndex(obj => obj.assetId === userassetId);
                         if(index!=-1) {
 
-                            cardObjectsList.value[index].amount = amount;
+                            dbcards.value[index].amount = useramount;
 
                         }
                 }
             });
-            cards.value.sort()
-            //console.log(assets)
-            //console.log(cardObjectsList.value)
-            //console.log(cardObjectsList.value[0].source)
-            //store.commit('increment')
-            //console.log(store.state.count) // -> 1
+
         } 
 
         catch (error) {
@@ -104,6 +51,30 @@
         }
     }
 
+    async function getCardsDetailsDB()
+    {
+    // try fetch DB
+    try {
+        const res: any = await fetch('/api/cards', { // /api = proxy to server (vite.config.ts) -> localhost:3000/
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+        })
+        const db = await res.json()
+        db.forEach(card => {
+            if (card.rarity !== 'AMO'){
+                card.amount = 0
+                dbcards.value.push(card)
+            }
+        });
+        console.log(dbcards)
+    }
+    catch (error) {
+        return
+    }
+    }
 </script>
 
 <template>
@@ -125,10 +96,18 @@
         </div>
         <!-- <img class="cards" :key='i' v-for="(card, i) in cardObjectsList" :src="'img/cards_artwork/'+ card['source']" alt="" width="250" height="300"> -->
             <div class="align-center">
-                <div class="cardsize inline-flex m-2" :key='i' v-for="(card, i) in cardObjectsList">
+                <div class="cardsize inline-flex m-2" :key='i' v-for="(card, i) in dbcards">
                     <div class="cardcomp">
-                        <p>M{{card['order']}}{{card['rarityName']}} {{card['name']}}</p>
-                        <a :href="'https://algoexplorer.io/asset/'+card['assetID']" target="_blank"><img draggable="false" :src="'img/cards_artwork/'+ card['source']" :class="card['amount'] > 0 ? 'cards' : 'cards-grey'"></a>
+                        <p>M{{card['order']}}{{card['rarity']}} {{card['name']}}</p>
+                        <div class="cardImage">
+                            <!-- <a :href="'https://algoexplorer.io/asset/'+card['assetID']" target="_blank"> -->
+                            <img draggable="false" :src="card['urlOptimized']" :class="card['amount'] > 0 ? 'cards' : 'cards-grey'">
+                            <div class="cardDetails cardName">{{card['name']}}</div>
+                            <div class="cardDetails cardAtt">{{card['attack']}} Att</div>
+                            <div class="cardDetails cardHP">{{card['health']}} HP</div>
+                            <div class="cardDetails cardEffect">{{card['effect']}}</div>
+                        
+                        </div>
                         <p>Amount: {{card['amount']}}</p>
                     </div>
                 </div>
@@ -164,12 +143,14 @@
     -o-filter:      grayscale(20%);
     transition: 0.12s;
 }
-img:hover{
-    -webkit-transform: scale(1.01);
+.cardImage:hover > .cardDetails{
+    transition: 0.25s;
+    opacity: 100%;
+    /* -webkit-transform: scale(1.01); */
     /* border-color: #d4d4d4;
     border-width: 1px; */
-    transform: scale(1.01);
-    transition: 0.05s;
+    /* transform: scale(1.01); */
+    
 }
 .align-center{
    text-align:center;
@@ -181,6 +162,41 @@ img:hover{
         font-size: 0.8em;
         height: 1.5em;
     }
+.cardImage{
+    position: relative;
+}
+
+.cardDetails
+{
+    position: absolute;
+    z-index: 1;
+    padding: 4px;
+    background-color: rgba(0, 0, 0, 0.706);
+    opacity: 0%;
+    transition: 0.5s;
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+}
+.cardName {
+  top: 0px;
+  left: 0px;
+}
+.cardAtt {
+  bottom: 0px;
+  left: 0px;
+}
+.cardHP {
+  bottom: 0px;
+  right: 0px;
+
+}
+.cardEffect {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  font-size: 0.75em;
+}
 @media only screen and (max-width: 900px){
     .cardsize{
         width: 20%;
