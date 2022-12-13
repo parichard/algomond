@@ -75,6 +75,26 @@
         return
     }
     }
+    function switchCardState(num) {
+        var x = document.getElementById("card"+String(num)).getElementsByClassName("cardDetails");
+        var btn = document.getElementById("btn"+String(num));
+        for(var i=0; i<x.length; i++) {
+            if(!x[i].classList.contains("hide") && !x[i].classList.contains("cardState") && !x[i].classList.contains("cardName")){
+                x[i].classList.add("hide");
+            }
+            else {
+                x[i].classList.remove("hide");
+            }
+        }
+        // if(btn.innerText==="Monster"){
+        //     btn.innerText="Spell";
+        //     btn.classList.add("spell");
+        // }
+        // else {
+        //     btn.innerText="Monster"
+        //     btn.classList.remove("spell");
+        // }
+    }
 </script>
 
 <template>
@@ -99,13 +119,15 @@
                 <div class="cardsize inline-flex m-2" :key='i' v-for="(card, i) in dbcards">
                     <div class="cardcomp">
                         <p>M{{card['order']}}{{card['rarity']}} {{card['name']}}</p>
-                        <div class="cardImage">
+                        <div class="cardImage" :id="'card'+i">
                             <!-- <a :href="'https://algoexplorer.io/asset/'+card['assetID']" target="_blank"> -->
                             <img draggable="false" :src="card['urlOptimized']" :class="card['amount'] > 0 ? 'cards' : 'cards-grey'">
-                            <div class="cardDetails cardName">{{card['name']}}</div>
+                            <!-- <div class="cardDetails cardName">{{card['name']}}</div> -->
                             <div class="cardDetails cardAtt">{{card['attack']}} Att</div>
                             <div class="cardDetails cardHP">{{card['health']}} HP</div>
-                            <div class="cardDetails cardEffect">{{card['effect']}}</div>
+                            <div class="cardDetails cardEffect monster"><button @click="switchCardState(i)" :id="'btn'+i">{{card['effect']}}</button></div>
+                            <div class="cardDetails cardEffect spell hide"><button @click="switchCardState(i)" :id="'btn'+i">{{card['effectSpell']}}</button></div>
+                            <!-- <div class="cardDetails cardState"><button class="monster" @click="switchCardState(i)" :id="'btn'+i">Monster</button></div> -->
                         
                         </div>
                         <p>Amount: {{card['amount']}}</p>
@@ -150,7 +172,19 @@
     /* border-color: #d4d4d4;
     border-width: 1px; */
     /* transform: scale(1.01); */
-    
+}
+.cardImage:hover > img {
+    opacity: 85%;
+    filter: blur(1px);
+    transition: 0.2s;
+}
+.cardDetails:hover {
+    transition: 0.25s;
+    opacity: 100%;
+}
+
+.hide{
+    display: none;
 }
 .align-center{
    text-align:center;
@@ -176,6 +210,7 @@
     transition: 0.5s;
     -webkit-backdrop-filter: blur(3px);
     backdrop-filter: blur(3px);
+    font-size: 0.8em;
 }
 .cardName {
   top: 0px;
@@ -195,7 +230,19 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
-  font-size: 0.75em;
+  font-size: 0.7em;
+}
+.cardState {
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.monster {
+    background-color: rgba(53, 0, 0, 0.733);
+}
+.spell {
+    background-color: rgb(0, 0, 57, 0.733);
 }
 @media only screen and (max-width: 900px){
     .cardsize{
