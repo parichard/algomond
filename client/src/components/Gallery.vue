@@ -69,6 +69,12 @@
                 dbcards.value.push(card)
             }
         });
+        dbcards.value.sort((a, b) => {
+            return a.rarityRank - b.rarityRank;
+        });
+        dbcards.value.sort((a, b) => {
+            return a.order - b.order;
+        });
         console.log(dbcards)
     }
     catch (error) {
