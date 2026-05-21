@@ -1,36 +1,4 @@
 <script setup lang="ts">
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
-import {ref, computed} from 'vue'
-
-const store = useStore()
-const router = useRouter()
-
-const getAddress = computed(() => {
-    const address = store.getters.getAddress
-    return (address ? address.slice(0,5) +  '...' + address.slice(53, 58) : '')
-})
-const getUsername = computed(() => {
-    const username = store.getters.getUsername
-    return (username ? username : '')
-})
-
-function connectMyAlgoWallet(){
-    store.dispatch("connectWallet")
-}
-function gotoUserpage(){
-    try {
-        const username = store.getters.getUsername
-        if(username) {
-            router.push({name: '/users', params: {username}})
-        } else {
-            throw new Error('username not found')
-        }
-    }catch(e) {
-        router.push('/login')
-    }
-}
-
 function responsive() {
   let x = document.getElementById("socialtabs");
   if (x.className === "socials") {
@@ -72,15 +40,6 @@ function responsive() {
             <li><a href="">Play</a></li>
             <li><router-link id="galleryurl" to="/gallery">Gallery</router-link></li>
             <!-- <li><router-link to="/">Merch</router-link></li> -->
-            <li>
-                <div class="wallet-co-button">
-                    <button @click="gotoUserpage">
-                        <!-- <img :class="getUsername ? '' : 'hidden'" id="wallet-icon" src="/img/wallet.svg" alt="wallet icon"> -->
-                        <p id="wallet-button-text">{{getUsername || "Connect Now"}}<br></p>
-                        <p id="wallet-button-text">{{getAddress || ""}}</p>
-                    </button>
-                </div>
-            </li>
         </ul>
 
         <ul id="socialtabs" class="socials">
